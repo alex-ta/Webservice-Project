@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="dialect">org.hibernate.dialect.H2Dialect</property>
+    <property name="hibernate.connection.url">jdbc:h2:~/test</property>
+    <property name="hibernate.connection.username">sa</property>
+    <property name="hibernate.connection.password"/>
+    <!-- Echo all executed SQL to stdout -->
+    <property name="show_sql">true</property>
+    <!-- Drop and re-create the database schema on startup -->
+    <property name="hbm2ddl.auto">create</property>
+  	<!--  <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>-->
+	<!--  <property name="hibernate.c3p0.min_size">1</property>-->
+	<!--  <property name="hibernate.c3p0.max_size">19</property>-->
+	<!--  <property name="hibernate.c3p0.timeout">120</property>-->
+	<!--  <property name="hibernate.c3p0.max_statements">10</property>-->  
+    <!--Here we are mapping Pojo class not hbm-->
+    <mapping class="data.Education" />
+    <mapping class="data.Job" />
+    <mapping class="data.Skill" />
+    <mapping class="data.User" />
+  </session-factory>
+</hibernate-configuration>
