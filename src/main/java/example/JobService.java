@@ -12,12 +12,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import dao.Dao;
+import dao.JobDao;
 import data.*;
-import database.Dao;
-import database.JobDao;
 import service.RestService;
 
-@Path("/jobs")
+@Path("/users/{uid}/jobs")
 public class JobService extends RestService<String,Job>{
 	private Dao<Job> dao = new JobDao();
     

@@ -13,21 +13,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.Dao;
-import dao.UserDao;
+import dao.SkillDao;
 import data.*;
 import service.RestService;
 
-@Path("/users")
-public class UserService extends RestService<String,User>{
-	private UserDao dao = new UserDao(); 
-		
-	
+@Path("/users/{uid}/skills")
+public class SkillService extends RestService<String,Skill>{
+	private Dao<Skill> dao = new SkillDao();
+    
 	@Override
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response postJSON(User o) {
+	public Response postJSON(Skill o) {
 		System.out.println("POST "+o);
 		dao.save(o);
 		return Response.ok().build();
@@ -38,7 +37,7 @@ public class UserService extends RestService<String,User>{
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response putJSON(User o, @PathParam("id") String id) {
+	public Response putJSON(Skill o, @PathParam("id") String id) {
 		System.out.println("PUT "+id+" "+o);
 		dao.save(o);
 		return Response.ok().build();
@@ -71,7 +70,6 @@ public class UserService extends RestService<String,User>{
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
 	public Response getAllJSON() {
-		dao.addData();
 		System.out.println("ALL "+dao.getAll());
 		return Response.ok().entity(dao.getAll()).build();
 	}

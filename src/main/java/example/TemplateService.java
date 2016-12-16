@@ -12,9 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import dao.Dao;
+import dao.TemplateDao;
 import data.*;
-import database.Dao;
-import database.TemplateDao;
 import service.RestService;
 
 @Path("/templates")

@@ -5,9 +5,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Proxy;
+
 @XmlRootElement
 @Entity
-@Table(name = "user")
+@Table(name = "skills")
+@Proxy(lazy = false)
 public class Skill {
 	private String collectiveterm;
 	private String term;

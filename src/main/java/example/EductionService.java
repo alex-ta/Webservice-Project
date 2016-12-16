@@ -12,12 +12,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import dao.Dao;
+import dao.EducationDao;
 import data.*;
-import database.Dao;
-import database.EducationDao;
 import service.RestService;
 
-@Path("/education")
+@Path("/users/{uid}/educations")
 public class EductionService extends RestService<String,Education>{
 	private Dao<Education> dao = new EducationDao();
     

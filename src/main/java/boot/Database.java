@@ -1,4 +1,4 @@
-package database;
+package boot;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +8,7 @@ public class Database {
 	
 	private static Database instance = null;
 	private SessionFactory sessionFactory;
+	private Configuration config;
 	
 	private Database(){
 		// Load Drivers
@@ -16,7 +17,8 @@ public class Database {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		sessionFactory = new Configuration().configure().buildSessionFactory();
+		config = new Configuration().configure();
+		sessionFactory = config.buildSessionFactory();
 	}
 	
 	public static Database getDatabase(){
@@ -26,8 +28,14 @@ public class Database {
 		return instance;
 	}
 	
+	public void closeDatabase(){
+		sessionFactory.close();
+	}
+	
 	public Session getSession(){
 		return sessionFactory.openSession();
 	}
+	
+	
 	
 } 

@@ -5,9 +5,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Proxy;
+
 @XmlRootElement
 @Entity
-@Table(name = "user")
+@Table(name = "job")
+@Proxy(lazy = false)
 public class Job {
 	private String start;
 	private String end;

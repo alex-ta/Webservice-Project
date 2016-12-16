@@ -1,28 +1,28 @@
 package data;
 
-import java.awt.Image;
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Proxy;
+
 @XmlRootElement
 @Entity
 @Table(name = "user")
+@Proxy(lazy = false)
 public class User {
 
+	@Column(name="id")
 	private String id;
 	
 	@Id
 	public String getId() {
 		return id;
 	}
-
-
+	@Id
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -47,21 +47,21 @@ public class User {
 	
 	// somehow not working
 	@Transient
-	private List<Job> jobs;
+	private final String jobs;
 	@Transient
-	private List<Skill> skills;
+	private final String skills;
 	@Transient
-	private List<Education> educationSkills;
+	private final String educationSkills;
 	@Transient
-	private List<String> hobbies;
+	private final String hobbies;
 		
-	private Image image;
+	private String image;
 
 	public User () {
-		this.jobs = new ArrayList<Job>();
-		this.skills = new ArrayList<Skill>();
-		this.educationSkills = new ArrayList<Education>();
-		this.hobbies = new ArrayList<String>();
+		this.jobs = "/user/"+this.getId()+"/jobs";
+		this.skills = "/user/"+this.getId()+"/skills";
+		this.educationSkills = "/user/"+this.getId()+"/educations";
+		this.hobbies = "/user/"+this.getId()+"/hobbies";
 	}
 	
 	
@@ -176,44 +176,33 @@ public class User {
 	public void setBirthplace(String birthplace) {
 		this.birthplace = birthplace;
 	}
-
-	public List<Job> getJobs() {
+	
+	@Transient
+	public String getJobs() {
 		return jobs;
 	}
-
-	public void addJob(Job job) {
-		this.jobs.add(job);
-	}
-
-	public List<Skill> getSkills() {
+	
+	@Transient
+	public String getSkills() {
 		return skills;
 	}
-
-	public void addSkill(Skill l) {
-		this.skills.add(l);
-	}
-
-	public List<Education> getEducationSkills() {
+	
+	@Transient
+	public String getEducationSkills() {
 		return educationSkills;
 	}
-
-	public void addEducation(Education education) {
-		this.educationSkills.add(education);
-	}
-
-	public List<String> getHobbies() {
+	
+	@Transient
+	public String getHobbies() {
 		return hobbies;
 	}
-
-	public void addHobby(String hobby) {
-		this.hobbies.add(hobby);
-	}
-
-	public Image getImage() {
+	
+	public String getImage() {
 		return image;
 	}
-
-	public void setImage(Image image) {
+	
+	@Transient
+	public void setImage(String image) {
 		this.image = image;
 	}
 	
