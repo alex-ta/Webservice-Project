@@ -13,20 +13,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.Dao;
-import dao.JobDao;
+import dao.HobbyDao;
 import data.*;
 import service.RestService;
 
-@Path("/users/{uid}/jobs")
-public class JobService extends RestService<String,Job>{
-	private Dao<Job> dao = new JobDao();
+@Path("/users/{uid}/hobbies")
+public class HobbyService extends RestService<String,Hobby>{
+	private Dao<Hobby> dao = new HobbyDao();
     
 	@Override
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response postJSON(Job o) {
+	public Response postJSON(Hobby o) {
 		System.out.println("POST "+o);
 		dao.save(o);
 		return Response.ok().build();
@@ -37,7 +37,7 @@ public class JobService extends RestService<String,Job>{
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response putJSON(Job o, @PathParam("id") String id) {
+	public Response putJSON(Hobby o, @PathParam("id") String id) {
 		System.out.println("PUT "+id+" "+o);
 		dao.save(o);
 		return Response.ok().build();
@@ -59,10 +59,10 @@ public class JobService extends RestService<String,Job>{
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response getJSON(@PathParam("uid") String uid,@PathParam("id") String id) {
-		Job o;
+	public Response getJSON(@PathParam("uid") String uid, @PathParam("id") String id) {
+		Hobby o;
 		if(id.equals("null")){
-			o = new Job(uid);
+			o = new Hobby(uid);
 		} else {
 			o = dao.get(uid, id);
 		}
@@ -74,9 +74,9 @@ public class JobService extends RestService<String,Job>{
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response getAllJSON() {
-		System.out.println("ALL "+dao.getAll());
-		return Response.ok().entity(dao.getAll()).build();
+	public Response getAllJSON(@PathParam("uid") String uid) {
+		System.out.println("ALL "+dao.getAll(uid));
+		return Response.ok().entity(dao.getAll(uid)).build();
 	}
 	
 	@Override

@@ -60,7 +60,6 @@ public class TemplateService extends RestService<String,Template>{
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
 	public Response getJSON(@PathParam("id") String id) {
-		System.out.println("SINGEL "+ dao.get(id));
 		return Response.ok().entity(dao.get(id)).build();
 	}
 

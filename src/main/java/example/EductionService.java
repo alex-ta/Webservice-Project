@@ -59,9 +59,14 @@ public class EductionService extends RestService<String,Education>{
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response getJSON(@PathParam("id") String id) {
-		System.out.println("SINGEL "+ dao.get(id));
-		return Response.ok().entity(dao.get(id)).build();
+	public Response getJSON(@PathParam("uid") String uid, @PathParam("id") String id) {
+		Education o;
+		if(id.equals("null")){
+			o = new Education(uid);
+		} else {
+			o = dao.get(uid, id);
+		}
+		return Response.ok().entity(o).build();
 	}
 
 	@Override
@@ -69,9 +74,9 @@ public class EductionService extends RestService<String,Education>{
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response getAllJSON() {
-		System.out.println("ALL "+dao.getAll());
-		return Response.ok().entity(dao.getAll()).build();
+	public Response getAllJSON(@PathParam("uid") String uid) {
+		System.out.println("ALL "+dao.getAll(uid));
+		return Response.ok().entity(dao.getAll(uid)).build();
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package data;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,12 +14,24 @@ import org.hibernate.annotations.Proxy;
 @Table(name = "job")
 @Proxy(lazy = false)
 public class Job {
+	
+	public static String URL = "/jobs";
+	
+	public Job(String uid){
+		this();
+		this.parentId = uid;
+	}
+	
+	Job(){
+		this.id = UUID.randomUUID().toString();
+	}
+	
 	private String start;
 	private String end;
 	private String company;
 	private String job;
 	private String id;
-	private String parendId;
+	private String parentId;
 	
 	@Id
 	public String getId() {
@@ -52,10 +66,10 @@ public class Job {
 		this.job = job;
 	}
 	public String getParendId() {
-		return parendId;
+		return parentId;
 	}
 	public void setParendId(String parendId) {
-		this.parendId = parendId;
+		this.parentId = parendId;
 	}
 	
 }

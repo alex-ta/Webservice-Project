@@ -1,9 +1,12 @@
 package dao;
 import java.util.List;
-import org.hibernate.Session;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
 import boot.Database;
-import data.User;
 
 public abstract class Dao <O> {
 	
@@ -21,18 +24,58 @@ public abstract class Dao <O> {
 	public O get(String k){
 		activeSession = base.getSession();
 		activeSession.beginTransaction();
-		O o = activeSession.load(getDaoClass(), k);
+		// Deprecated in Favour of JPA Query
+		CriteriaBuilder builder = activeSession.getCriteriaBuilder();
+		CriteriaQuery<O> criteria = builder.createQuery(getDaoClass());
+		Root<O> root = criteria.from(getDaoClass());
+		criteria.select(root);
+		criteria.where(builder.equal(root.get("id"), k));
+		O list = activeSession.createQuery(criteria).getSingleResult();
 		activeSession.getTransaction().commit();
-		closeSession();
-		return o;
-		
+		return list;	
 	}
 	
 	public List<O> getAll(){
 		activeSession = base.getSession();
 		activeSession.beginTransaction();
 		// Deprecated in Favour of JPA Query
-		List<O> list = activeSession.createCriteria(User.class).list();
+		CriteriaBuilder builder = activeSession.getCriteriaBuilder();
+		CriteriaQuery<O> criteria = builder.createQuery(getDaoClass());
+		Root<O> root = criteria.from(getDaoClass());
+		criteria.select(root);
+		List<O> list = activeSession.createQuery(criteria).getResultList();
+		activeSession.getTransaction().commit();
+		return list;
+		}
+
+	public List<O> getAll(String parentId){
+		activeSession = base.getSession();
+		activeSession.beginTransaction();
+		// Deprecated in Favour of JPA Query
+		CriteriaBuilder builder = activeSession.getCriteriaBuilder();
+		CriteriaQuery<O> criteria = builder.createQuery(getDaoClass());
+		Root<O> root = criteria.from(getDaoClass());
+		criteria.select(root);
+		criteria.where(builder.equal(root.get("parentId"), parentId));
+		List<O> list = activeSession.createQuery(criteria).getResultList();
+		activeSession.getTransaction().commit();
+		return list;
+		}
+	
+	public O get(String parentId, String id){
+		activeSession = base.getSession();
+		activeSession.beginTransaction();
+		// Deprecated in Favour of JPA Query
+		CriteriaBuilder builder = activeSession.getCriteriaBuilder();
+		CriteriaQuery<O> criteria = builder.createQuery(getDaoClass());
+		Root<O> root = criteria.from(getDaoClass());
+		criteria.select(root);
+		criteria.where(
+				builder.and(
+						builder.equal(root.get("parentId"), parentId),
+						builder.equal(root.get("id"), id)
+						));
+		O list = activeSession.createQuery(criteria).getSingleResult();
 		activeSession.getTransaction().commit();
 		return list;
 		}

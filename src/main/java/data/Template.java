@@ -2,6 +2,7 @@ package data;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Id;
 
@@ -13,8 +14,8 @@ public abstract class Template {
 	private HashMap<String,String> templates;
 	private HashMap<String,List<String>> keywords;
 	
-	
 	public Template(){
+		this.id = UUID.randomUUID().toString();
 		templates = new HashMap<String,String>();
 		keywords = new HashMap<String,List<String>>();
 	}

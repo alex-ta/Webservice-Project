@@ -1,5 +1,7 @@
 package data;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,8 +14,20 @@ import org.hibernate.annotations.Proxy;
 @Table(name = "education")
 @Proxy(lazy = false)
 public class Education {
+	
+	public static String URL = "/educations";
+	
+	public Education(String uid){
+		this();
+		this.parentId = uid;
+	}
+	
+	public Education(){
+		this.id = UUID.randomUUID().toString();
+	}
+	
 	private String id;
-	private String parendId;
+	private String parentId;
 	private String start;
 	private String end;
 	private String institute;
@@ -27,11 +41,11 @@ public class Education {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getParendId() {
-		return parendId;
+	public String getParentId() {
+		return parentId;
 	}
-	public void setParendId(String parendId) {
-		this.parendId = parendId;
+	public void setParentId(String parendId) {
+		this.parentId = parendId;
 	}
 	public String getStart() {
 		return start;

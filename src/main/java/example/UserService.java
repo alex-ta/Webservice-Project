@@ -12,7 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import dao.Dao;
 import dao.UserDao;
 import data.*;
 import service.RestService;
@@ -61,8 +60,13 @@ public class UserService extends RestService<String,User>{
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
 	public Response getJSON(@PathParam("id") String id) {
-		System.out.println("SINGEL "+ dao.get(id));
-		return Response.ok().entity(dao.get(id)).build();
+		User o;
+		if(id.equals("null")){
+			o = new User();
+		} else {
+			o = dao.get(id);
+		}
+		return Response.ok().entity(o).build();
 	}
 
 	@Override

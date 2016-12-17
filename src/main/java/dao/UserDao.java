@@ -1,6 +1,4 @@
 package dao;
-
-import java.util.LinkedList;
 import java.util.UUID;
 
 import data.User;
@@ -37,7 +35,6 @@ public class UserDao extends Dao<User>{
 			o.setNationality("Nation");
 			o.setPhone("0102300020123");
 			o.setStreet("sadasda");
-			o.setId(UUID.randomUUID().toString());
 			o.setImage("https://lh3.googleusercontent.com/0-BzaWtxoAnsBjQ_wzUcKxyF07XE7v2Kkg1ogPVUdzmQpvaz118uHQEGU6BdtzJuzfo=h556");
 			this.save(o);
 		}

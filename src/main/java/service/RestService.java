@@ -15,7 +15,6 @@ public abstract class RestService <I,O> {
 		return Response.serverError().build();
 	}
 	
-	
 	public Response putXML(I i, O o){
 		return Response.serverError().build();
 	}
@@ -50,6 +49,16 @@ public abstract class RestService <I,O> {
 		return Response.serverError().build();
 	}
 	
+	public Response getXML(I o, I p){
+		return Response.serverError().build();
+	}
+	public Response getJSON(I o, I p){
+		return Response.serverError().build();
+	}
+	public Response getFORM(I o, I p){
+		return Response.serverError().build();
+	}
+	
 	public Response getAllXML(){
 		return Response.serverError().build();
 	}
@@ -57,6 +66,16 @@ public abstract class RestService <I,O> {
 		return Response.serverError().build();
 	}
 	public Response getAllFORM(){
+		return Response.serverError().build();
+	}
+
+	public Response getAllXML(I id){
+		return Response.serverError().build();
+	}
+	public Response getAllJSON(I id){
+		return Response.serverError().build();
+	}
+	public Response getAllFORM(I id){
 		return Response.serverError().build();
 	}
 	

@@ -59,9 +59,14 @@ public class SkillService extends RestService<String,Skill>{
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("application/json")
-	public Response getJSON(@PathParam("id") String id) {
-		System.out.println("SINGEL "+ dao.get(id));
-		return Response.ok().entity(dao.get(id)).build();
+	public Response getJSON(@PathParam("uid") String uid, @PathParam("id") String id) {
+		Skill o;
+		if(id.equals("null")){
+			o = new Skill(uid);
+		} else {
+			o = dao.get(uid, id);
+		}
+		return Response.ok().entity(o).build();
 	}
 
 	@Override

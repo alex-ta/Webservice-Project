@@ -64,8 +64,7 @@
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>Evaluation Area</realm-name>
-    </login-config>
-    
+    </login-config> 
 	<filter>
 	  <filter-name>CorsFilter</filter-name>
 	  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
@@ -74,6 +73,16 @@
 	  <filter-name>CorsFilter</filter-name>
 	  <url-pattern>/*</url-pattern>
 	</filter-mapping>
-		
+	<!--
+	<filter>
+	   <filter-name>springSecurityFilterChain</filter-name>
+	   <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+	   <filter-name>springSecurityFilterChain</filter-name>
+	   <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	-->
+	
 
 </web-app>

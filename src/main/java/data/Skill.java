@@ -1,5 +1,7 @@
 package data;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,12 +14,24 @@ import org.hibernate.annotations.Proxy;
 @Table(name = "skills")
 @Proxy(lazy = false)
 public class Skill {
+	
+	public static String URL = "/skills";
+	
+	public Skill(String uid){
+		this();
+		this.parentId = uid;
+	}
+	
+	Skill(){
+		this.id = UUID.randomUUID().toString();
+	}
+	
 	private String collectiveterm;
 	private String term;
 	private int priority;
 	private int ability;
 	private String id;
-	private String parendId;
+	private String parentId;
 	
 	@Id
 	public String getId() {
@@ -27,10 +41,10 @@ public class Skill {
 		this.id = id;
 	}
 	public String getParendId() {
-		return parendId;
+		return parentId;
 	}
 	public void setParendId(String parendId) {
-		this.parendId = parendId;
+		this.parentId = parendId;
 	}
 	
 	public String getCollectiveterm() {

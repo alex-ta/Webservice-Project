@@ -1,5 +1,7 @@
 package data;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +15,10 @@ import org.hibernate.annotations.Proxy;
 @Entity
 @Table(name = "user")
 @Proxy(lazy = false)
+
 public class User {
+	
+	public static String URL = "/users";
 
 	@Column(name="id")
 	private String id;
@@ -47,21 +52,22 @@ public class User {
 	
 	// somehow not working
 	@Transient
-	private final String jobs;
+	private final String jobsUrl;
 	@Transient
-	private final String skills;
+	private final String skillsUrl;
 	@Transient
-	private final String educationSkills;
+	private final String educationSkillsUrl;
 	@Transient
-	private final String hobbies;
+	private final String hobbiesUrl;
 		
 	private String image;
 
 	public User () {
-		this.jobs = "/user/"+this.getId()+"/jobs";
-		this.skills = "/user/"+this.getId()+"/skills";
-		this.educationSkills = "/user/"+this.getId()+"/educations";
-		this.hobbies = "/user/"+this.getId()+"/hobbies";
+		this.id = UUID.randomUUID().toString();
+		this.jobsUrl = URL+"/"+this.getId()+Job.URL;
+		this.skillsUrl = URL+"/"+this.getId()+Skill.URL;
+		this.educationSkillsUrl = URL+"/"+this.getId()+Education.URL;
+		this.hobbiesUrl = URL+"/"+this.getId()+Hobby.URL;
 	}
 	
 	
@@ -178,23 +184,23 @@ public class User {
 	}
 	
 	@Transient
-	public String getJobs() {
-		return jobs;
+	public String getJobsUrl() {
+		return jobsUrl;
 	}
 	
 	@Transient
-	public String getSkills() {
-		return skills;
+	public String getSkillsUrl() {
+		return skillsUrl;
 	}
 	
 	@Transient
-	public String getEducationSkills() {
-		return educationSkills;
+	public String getEducationSkillsUrl() {
+		return educationSkillsUrl;
 	}
 	
 	@Transient
-	public String getHobbies() {
-		return hobbies;
+	public String getHobbiesUrl() {
+		return hobbiesUrl;
 	}
 	
 	public String getImage() {
