@@ -1,9 +1,9 @@
 var x = "";
-var baseUrl = "http://localhost:8080/helloworld/rest";
+var baseUrl = "http://localhost:8080/helloworld";
 
 $(document).ready(function() {
 	 $.ajax({
-			 url: baseUrl+"/users",
+			 url: baseUrl+"/users/",
 			 headers: {
 				 "Authorization": "Basic " + btoa("User" + ":" + "aaaa"),
   		         "Accept": "application/json"

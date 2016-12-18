@@ -4,7 +4,7 @@ var x;
 
 client = function(){
 
-	var baseUrl = "http://localhost:8080/helloworld/rest/users"
+	var baseUrl = "http://localhost:8080/helloworld/users/"
 		
 	this.getAll = function() { 
 		$.ajax({

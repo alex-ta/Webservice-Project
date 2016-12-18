@@ -1,4 +1,4 @@
-package com.boot;
+package com.boot.spring;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
