@@ -18,10 +18,10 @@
         <property name="max_fetch_depth">3</property>  
       
     <!-- Here we are mapping Pojo class not hbm-->
-    <mapping class="data.Hobby" />
-    <mapping class="data.Education" />
-    <mapping class="data.Job" />
-    <mapping class="data.Skill" />
-    <mapping class="data.User" />
+    <mapping class="com.data.Hobby" />
+    <mapping class="com.data.Education" />
+    <mapping class="com.data.Job" />
+    <mapping class="com.data.Skill" />
+    <mapping class="com.data.User" />
   </session-factory>
 </hibernate-configuration>
