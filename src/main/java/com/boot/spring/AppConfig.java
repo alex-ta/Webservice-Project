@@ -8,7 +8,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@ComponentScan( {"com.boot.spring", "com.boot", "com.example"})
+@ComponentScan( {"com.security","com.boot.spring", "com.boot", "com.example"})
 @Import({ SecurityConfig.class })
 public class AppConfig {
 

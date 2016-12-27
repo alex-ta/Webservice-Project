@@ -1,5 +1,4 @@
 package com.dao;
-import java.util.UUID;
 
 import com.data.User;
 

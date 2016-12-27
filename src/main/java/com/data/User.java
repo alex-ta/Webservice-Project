@@ -1,41 +1,52 @@
 package com.data;
 
+import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Proxy;
 
-@XmlRootElement
+import com.data.Roles;
+
 @Entity
 @Table(name = "user")
 @Proxy(lazy = false)
 
 public class User {
 	
-	public static String URL = "/users";
-
-	@Column(name="id")
-	private String id;
-	
 	@Id
-	public String getId() {
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.AUTO)  
+	public int getId() {
 		return id;
 	}
-	@Id
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-
+	
+	private int id;
+	private String uuid;
 	private String name;
 	private String surname;
 	private String title;
 	private String gender;
+	private String password;
 	
 	private String street;
 	private String housenumber;
@@ -49,28 +60,75 @@ public class User {
 	private String birthdate;
 	private String birthplace;
 	
-	
-	// somehow not working
-	@Transient
-	private final String jobsUrl;
-	@Transient
-	private final String skillsUrl;
-	@Transient
-	private final String educationSkillsUrl;
-	@Transient
-	private final String hobbiesUrl;
-		
+	// bei create ressource zurück
 	private String image;
-
+	private List<Job> jobs;
+	private List<Skill> skills;
+	private List<Education> educations;
+	private List<Hobby> hobbies;
+	private List<Roles> roles;
+	
 	public User () {
-		this.id = UUID.randomUUID().toString();
-		this.jobsUrl = URL+"/"+this.getId()+Job.URL;
-		this.skillsUrl = URL+"/"+this.getId()+Skill.URL;
-		this.educationSkillsUrl = URL+"/"+this.getId()+Education.URL;
-		this.hobbiesUrl = URL+"/"+this.getId()+Hobby.URL;
+		this.uuid = UUID.randomUUID().toString();
 	}
-	
-	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "parent_id", referencedColumnName = "id")
+	public List<Job> getJobs() {
+		return jobs;
+	}
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
+	}
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "parent_id", referencedColumnName = "id")
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "parent_id", referencedColumnName = "id")
+	public List<Education> getEducations() {
+		return educations;
+	}
+	public void setEducations(List<Education> educations) {
+		this.educations = educations;
+	}
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "parent_id", referencedColumnName = "id")
+	public List<Hobby> getHobbies() {
+		return hobbies;
+	}
+	public void setHobbies(List<Hobby> hobbies) {
+		this.hobbies = hobbies;
+	}
+	@ElementCollection(targetClass = Roles.class)
+	@CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "role_id"))
+	@Column(name = "role", nullable = false)
+	@Enumerated(EnumType.STRING)
+	public List<Roles> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
+	}
 	public String getName() {
 		return name;
 	}
@@ -181,26 +239,6 @@ public class User {
 
 	public void setBirthplace(String birthplace) {
 		this.birthplace = birthplace;
-	}
-	
-	@Transient
-	public String getJobsUrl() {
-		return jobsUrl;
-	}
-	
-	@Transient
-	public String getSkillsUrl() {
-		return skillsUrl;
-	}
-	
-	@Transient
-	public String getEducationSkillsUrl() {
-		return educationSkillsUrl;
-	}
-	
-	@Transient
-	public String getHobbiesUrl() {
-		return hobbiesUrl;
 	}
 	
 	public String getImage() {

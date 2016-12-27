@@ -2,45 +2,54 @@ package com.data;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Proxy;
 
-@XmlRootElement
 @Entity
 @Table(name = "job")
 @Proxy(lazy = false)
 public class Job {
 	
-	public static String URL = "/jobs";
-	
-	public Job(String uid){
-		this();
-		this.parentId = uid;
-	}
-	
 	Job(){
-		this.id = UUID.randomUUID().toString();
+		this.uuid = UUID.randomUUID().toString();
 	}
-	
 	private String start;
 	private String end;
 	private String company;
 	private String job;
-	private String id;
-	private String parentId;
+	private int id;
+	private String uuid;
+	private int parentId;
+	
 	
 	@Id
-	public String getId() {
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.AUTO)  
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	@Column(name="parent_id")
+	public int getParentId() {
+		return parentId;
+	}
+	public void setParentId(int parendId) {
+		this.parentId = parendId;
+	}
 	public String getStart() {
 		return start;
 	}
@@ -65,11 +74,4 @@ public class Job {
 	public void setJob(String job) {
 		this.job = job;
 	}
-	public String getParentId() {
-		return parentId;
-	}
-	public void setParentId(String parendId) {
-		this.parentId = parendId;
-	}
-	
 }
