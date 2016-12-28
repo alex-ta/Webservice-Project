@@ -2,6 +2,7 @@ package com.example;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,8 +15,9 @@ import com.service.RestService;
 public class EductionService extends RestService<Education>{
 	// benutzer check 
 	// user check in den filtern
-	public EductionService() {
-		super(new EducationDao());
+	@Autowired
+	public EductionService(EducationDao d) {
+		super(d);
 	}
 
 	@Override

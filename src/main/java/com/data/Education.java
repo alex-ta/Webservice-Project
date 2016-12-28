@@ -1,7 +1,5 @@
 package com.data;
 
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,9 +15,7 @@ import org.hibernate.annotations.Proxy;
 @Proxy(lazy = false)
 public class Education {
 	
-	public Education(){
-		this.uuid = UUID.randomUUID().toString();
-	}
+	public Education(){}
 	
 
 	private String start;
@@ -29,7 +25,7 @@ public class Education {
 	private String degree;
 	private int id;
 	private String uuid;
-	private int parentId;
+	private String parentId;
 	
 	@Id
 	@Column(name="id")
@@ -48,10 +44,10 @@ public class Education {
 		this.uuid = uuid;
 	}
 	@Column(name="parent_id")
-	public int getParentId() {
+	public String getParentId() {
 		return parentId;
 	}
-	public void setParentId(int parendId) {
+	public void setParentId(String parendId) {
 		this.parentId = parendId;
 	}
 

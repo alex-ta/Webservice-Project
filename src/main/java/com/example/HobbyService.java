@@ -1,5 +1,6 @@
 package com.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,7 +14,8 @@ import com.service.RestChildService;
 // 
 @RequestMapping("/users/{uid}/hobbies")
 public class HobbyService extends RestChildService<Hobby>{
-	public HobbyService() {
-		super(new HobbyDao());
+	@Autowired
+	public HobbyService(HobbyDao d) {
+		super(d);
 	}
 }

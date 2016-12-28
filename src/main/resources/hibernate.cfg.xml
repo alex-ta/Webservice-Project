@@ -23,6 +23,5 @@
     <mapping class="com.data.Job" />
     <mapping class="com.data.Skill" />
     <mapping class="com.data.User" />
-  	<mapping class="com.security.User" />
   </session-factory>
 </hibernate-configuration>

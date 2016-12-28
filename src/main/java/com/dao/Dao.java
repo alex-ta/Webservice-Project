@@ -22,6 +22,20 @@ public abstract class Dao <O> {
 		base = Database.getDatabase();
 	}
 	
+	public O get(int k){
+		activeSession = base.getSession();
+		activeSession.beginTransaction();
+		// Deprecated in Favour of JPA Query
+		CriteriaBuilder builder = activeSession.getCriteriaBuilder();
+		CriteriaQuery<O> criteria = builder.createQuery(getDaoClass());
+		Root<O> root = criteria.from(getDaoClass());
+		criteria.select(root);
+		criteria.where(builder.equal(root.get("id"), k));
+		O list = activeSession.createQuery(criteria).getSingleResult();
+		activeSession.getTransaction().commit();
+		return list;	
+	}
+	
 	public O get(String k){
 		activeSession = base.getSession();
 		activeSession.beginTransaction();
@@ -85,7 +99,7 @@ public abstract class Dao <O> {
 		activeSession = base.getSession();
 		activeSession.beginTransaction();
 		setPrimaryKey(o);
-		activeSession.persist(o);
+		activeSession.merge(o);
 		activeSession.getTransaction().commit();
 		closeSession();
 	}

@@ -1,9 +1,5 @@
 package com.security;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,36 +7,32 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.UserService;
+import com.dao.UserDao;
+import com.data.wrapper.Security_User_Wrapper;
 
 @Controller
 public class RegistrationController {
     
-	
+	@Autowired
 	private UserDao dao;
 	
-	public RegistrationController(){
-		dao = new UserDao();
-	}
+	public RegistrationController(){}
 
  
    // private UserValidator userValidator;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-
+        model.addAttribute("userForm", new Security_User_Wrapper());
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+    public String registration(@ModelAttribute("userForm") Security_User_Wrapper userForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-
-        dao.save(userForm);
-
+        dao.save(userForm.getUser());
         return "redirect:/welcome";
     }
 

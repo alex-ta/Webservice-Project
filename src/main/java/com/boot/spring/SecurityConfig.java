@@ -11,15 +11,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.security.UserDetail;
+import com.security.UserSecurityService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	UserSecurityService service;
+	
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(new UserDetail());
+        auth.userDetailsService(service);
         auth.authenticationProvider(authenticationProvider());
     }
 	
@@ -57,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(new UserDetail());
+        authenticationProvider.setUserDetailsService(service);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }

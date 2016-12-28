@@ -1,11 +1,54 @@
 package com.data.wrapper;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.data.User;
 
 @XmlRootElement
 public class User_Wrapper {
+
+	public User_Wrapper(){}
+	
+	public User_Wrapper(User user){
+		this.uuid = user.getUuid();
+		this.name = user.getId();
+		this.surname = user.getSurname();
+		this.title = user.getTitle();
+		this.gender = user.getGender();
+		this.street = user.getStreet();
+		this.housenumber = user.getHousenumber(); 
+		this.plz = user.getPlz();
+		this.city = user.getCity();
+		this.country = user.getCountry();
+		this.nationality = user.getNationality();
+		this.phone = user.getPhone();
+		this.mail = user.getMail();
+		this.birthdate = user.getBirthdate();
+		this.birthplace = user.getBirthplace();
+		this.image = user.getImage();
+	}
+	
+	public User getUser(){
+		User user = new User();
+		user.setUuid(this.getUuid());
+		user.setId(this.getName());
+		user.setSurname(this.getSurname());
+		user.setTitle(this.getTitle());
+		user.setGender(this.getGender());
+		user.setStreet(this.getStreet());
+		user.setHousenumber(this.getHousenumber());
+		user.setPlz(this.getPlz());
+		user.setCity(this.getCity());
+		user.setCountry(this.getCountry());
+		user.setNationality(this.getNationality());
+		user.setPhone(this.getPhone());
+		user.setMail(this.getMail());
+		user.setBirthdate(this.getBirthdate());
+		user.setBirthplace(this.getBirthplace());
+		user.setImage(this.getImage());
+		return user;
+	}
+	
 	
 	private String uuid;
 	private String name;
@@ -30,12 +73,6 @@ public class User_Wrapper {
 	private String skillUrl;
 	private String educationUrl;
 	private String hobbyUrl;	
-	
-	private List<String> jobs;
-	private List<String> skills;
-	private List<String> educations;
-	private List<String> hobbies;
-	
 	
 	public String getUuid() {
 		return uuid;
@@ -157,29 +194,5 @@ public class User_Wrapper {
 	public void setHobbyUrl(String hobbyUrl) {
 		this.hobbyUrl = hobbyUrl;
 	}
-	public List<String> getJobs() {
-		return jobs;
-	}
-	public void setJobs(List<String> jobs) {
-		this.jobs = jobs;
-	}
-	public List<String> getSkills() {
-		return skills;
-	}
-	public void setSkills(List<String> skills) {
-		this.skills = skills;
-	}
-	public List<String> getEducations() {
-		return educations;
-	}
-	public void setEducations(List<String> educations) {
-		this.educations = educations;
-	}
-	public List<String> getHobbies() {
-		return hobbies;
-	}
-	public void setHobbies(List<String> hobbies) {
-		this.hobbies = hobbies;
-	}
-
+	
 }
