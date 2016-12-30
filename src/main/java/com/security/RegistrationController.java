@@ -1,7 +1,12 @@
 package com.security;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +20,21 @@ public class RegistrationController {
     
 	@Autowired
 	private UserDao dao;
+
+	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
+	public String welcomePage(Model model) {
+		return "welcome";
+	}
 	
-	public RegistrationController(){}
-
- 
-   // private UserValidator userValidator;
-
+	@RequestMapping(value="/main", method = RequestMethod.GET)
+	public String printWelcome(ModelMap model, HttpSession session) {
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String name = auth.getName(); 
+    model.addAttribute("username", name);
+	return "main";
+	 
+	}
+	
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new Security_User_Wrapper());
@@ -46,11 +60,5 @@ public class RegistrationController {
 
         return "login";
     }
-
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "welcome";
-    }
-
 
 }

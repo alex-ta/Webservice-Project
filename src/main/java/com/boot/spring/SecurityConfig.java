@@ -22,13 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(service);
         auth.authenticationProvider(authenticationProvider());
     }
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
         http
         .authorizeRequests()
             .antMatchers("/resources/**", "/registration").permitAll()
@@ -61,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(service);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        //authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
  

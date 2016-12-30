@@ -29,6 +29,7 @@ public class Security_User_Wrapper implements UserDetails{
 
 
 	public Security_User_Wrapper(User user){
+		this.name = user.getId();
 		this.password = user.getPassword();
 		this.uuid = user.getUuid();
 		this.roles = user.getRoles();
@@ -39,8 +40,8 @@ public class Security_User_Wrapper implements UserDetails{
 
 	public User getUser(){
 		User user = new User();
+		user.setId(this.getName());
 		user.setPassword(this.getPassword());
-		user.setUuid(this.getUuid());
 		user.setUuid(this.getUuid());
 		user.setRoles(this.getRoles());
 		user.setId(this.getName());
