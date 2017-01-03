@@ -1,5 +1,7 @@
 package com.data.wrapper;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.data.Skill;
@@ -24,6 +26,8 @@ public class Skill_Wrapper {
 	private String uuid;
 	@JsonProperty(required = true)
 	@ApiModelProperty(notes = "The user that belongs to this skill", required = true)
+    @NotNull
+    @Size(max=200)
 	private String user;
 	
 	public Skill_Wrapper(){}

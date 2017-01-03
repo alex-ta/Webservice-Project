@@ -4,16 +4,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value=HttpStatus.FORBIDDEN)  
-public class E403 extends RuntimeException{
-	
-	public E403(String message){
-		this.message = message;
-	}
-	
-	private String message;
-	
-	public String getMessage(){
-		return message;
+public class E403 extends E {
+
+	public E403(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -21,4 +16,5 @@ public class E403 extends RuntimeException{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+
 }

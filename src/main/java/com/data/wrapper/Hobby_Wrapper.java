@@ -1,5 +1,8 @@
 package com.data.wrapper;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 // jndi Datasource
 // tomcat realm
 
@@ -18,6 +21,8 @@ public class Hobby_Wrapper {
 	private String name;
 	@JsonProperty(required = true)
 	@ApiModelProperty(notes = "The user that belongs to this hobby", required = true)
+    @NotNull
+    @Size(max=200)
 	private String user;
 	@JsonProperty(required = true)
     @ApiModelProperty(notes = "The urlid which identifies an existing user object", required = true)

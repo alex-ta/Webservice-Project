@@ -1,5 +1,5 @@
 var x = "";
-var baseUrl = "http://localhost:8080/helloworld";
+var baseUrl = "http://localhost:8080/helloworld/v1";
 
 $(document).ready(function() {
 	 $.ajax({

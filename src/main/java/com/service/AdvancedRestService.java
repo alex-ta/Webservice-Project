@@ -10,6 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dao.Dao;
+import com.service.exceptions.E;
+import com.service.exceptions.E403;
+import com.service.exceptions.E404;
+import com.service.exceptions.E500;
 
 
 @Controller
@@ -24,6 +28,7 @@ public abstract class AdvancedRestService <W, O>  extends BasicRestService<W, O>
 	public abstract List<String> getList(O o, String attName);
 	public abstract boolean hasUser(String w);
 	
+		  
 	public ResponseEntity<List<String>> getLinks (String uuid, String attName) { 
 		  try {
 			  if(hasRole(allowedRole) || hasUser(uuid)){
@@ -31,14 +36,16 @@ public abstract class AdvancedRestService <W, O>  extends BasicRestService<W, O>
 				  if(o != null){
 					  return new ResponseEntity<List<String>>(getList(o, attName), HttpStatus.OK);
 				  } else {
-					  return new ResponseEntity<List<String>>(HttpStatus.NOT_FOUND);
+					  throw new E404("Not entity found to uuid "+uuid);
 				  }
 			  } else {
-				  return new ResponseEntity<List<String>>(HttpStatus.FORBIDDEN);
+				  throw new E403("Not allow on to see all resources");
 			  }
+		  } catch (E e){
+			  throw e;
 		  } catch (Exception e){
 			  e.printStackTrace();
-			  return new ResponseEntity<List<String>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			  throw new E500("Ups something went wrong");
 		  }
 	}
 }

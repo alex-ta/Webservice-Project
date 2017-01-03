@@ -3,10 +3,10 @@ package com.service.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value=HttpStatus.NOT_FOUND)  
-public class E404 extends E {
+@ResponseStatus(value=HttpStatus.BAD_REQUEST)  
+public class E400 extends E {
 
-	public E404(String message) {
+	public E400(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}

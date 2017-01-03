@@ -1,5 +1,7 @@
 package com.data.wrapper;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.data.Job;
@@ -24,6 +26,8 @@ public class Job_Wrapper {
 	private String name;
 	@JsonProperty(required = true)
 	@ApiModelProperty(notes = "The user that belongs to this job", required = true)
+    @NotNull
+    @Size(max=200)
 	private String user;
 	@JsonProperty(required = true)
     @ApiModelProperty(notes = "The urlid which identifies an existing user object", required = true)

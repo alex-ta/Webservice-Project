@@ -1,5 +1,7 @@
 package com.data.wrapper;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.data.User;
@@ -76,17 +78,9 @@ public class User_Wrapper {
 	
  	@JsonProperty(required = true)
     @ApiModelProperty(notes = "The urlid which identifies an existing user object", required = true)
-	private String username;
- 	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-
+    @NotNull
+    @Size(max=200)
+ 	private String username;
 	@JsonProperty(required = true)
     @ApiModelProperty(notes = "The urlid which identifies an existing user object", required = true)
 	private String uuid;
@@ -118,6 +112,8 @@ public class User_Wrapper {
  	@JsonProperty(required = true)
     @ApiModelProperty(notes = "The country of the users address", required = true)
 	private String country;
+ 	@NotNull
+    @Size(max=200)
  	@JsonProperty(required = true)
     @ApiModelProperty(notes = "The nationality of the user", required = true)
 	private String nationality;
@@ -139,6 +135,13 @@ public class User_Wrapper {
     @ApiModelProperty(notes = "The users image", required = true)
 	private String image;
 	
+ 	
+ 	public String getUsername() {
+		return username;
+ 	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getUuid() {
 		return uuid;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ import com.data.User;
 import com.data.wrapper.Security_User_Wrapper;
 import com.data.wrapper.User_Wrapper;
 import com.service.AdvancedRestService;
+
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Controller
 @RequestMapping("/v1/users")
@@ -62,22 +66,38 @@ public class UserService extends AdvancedRestService<User_Wrapper, User>{
 		return list;
 	}
 	
-	@RequestMapping(value = "/{uuid}/hobbies", method = RequestMethod.GET)
+	@ApiResponses({
+	@ApiResponse(code = 403, message = "FORBIDDEN"),
+	@ApiResponse(code = 404, message = "NOT FOUND"),
+	@ApiResponse(code = 500, message = "INTERNAL SERVER ERROR")})
+	@RequestMapping(value = "/{uuid}/hobbies", method = {RequestMethod.GET, RequestMethod.HEAD}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<String>> getHobbies(@PathVariable("uuid") String uuid) { 
 		return super.getLinks(uuid, "hobbies");
 	}
 	
-	@RequestMapping(value = "/{uuid}/jobs", method = RequestMethod.GET)
+	@ApiResponses({
+	@ApiResponse(code = 403, message = "FORBIDDEN"),
+	@ApiResponse(code = 404, message = "NOT FOUND"),
+	@ApiResponse(code = 500, message = "INTERNAL SERVER ERROR")})
+	@RequestMapping(value = "/{uuid}/jobs", method = {RequestMethod.GET, RequestMethod.HEAD}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<String>> getJobs(@PathVariable("uuid") String uuid) { 
 		return super.getLinks(uuid, "jobs");
 	}
 	
-	@RequestMapping(value = "/{uuid}/educations", method = RequestMethod.GET)
+	@ApiResponses({
+	@ApiResponse(code = 403, message = "FORBIDDEN"),
+	@ApiResponse(code = 404, message = "NOT FOUND"),
+	@ApiResponse(code = 500, message = "INTERNAL SERVER ERROR")})
+	@RequestMapping(value = "/{uuid}/educations", method = {RequestMethod.GET, RequestMethod.HEAD}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<String>> getEducations(@PathVariable("uuid") String uuid) { 
 		return super.getLinks(uuid, "educations");
 	}
 	
-	@RequestMapping(value = "/{uuid}/skills", method = RequestMethod.GET)
+	@ApiResponses({
+	@ApiResponse(code = 403, message = "FORBIDDEN"),
+	@ApiResponse(code = 404, message = "NOT FOUND"),
+	@ApiResponse(code = 500, message = "INTERNAL SERVER ERROR")})
+	@RequestMapping(value = "/{uuid}/skills", method = {RequestMethod.GET, RequestMethod.HEAD}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<String>> getSkills(@PathVariable("uuid") String uuid) { 
 		return super.getLinks(uuid, "skills");
 	}
