@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -30,6 +29,7 @@ public class User {
 	
 	private String uuid;
 	private String id;
+	private String name;
 	private String surname;
 	private String title;
 	private String gender;
@@ -127,6 +127,14 @@ public class User {
 		this.id = id;
 	}
 
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getSurname() {
 		return surname;
 	}
@@ -235,7 +243,6 @@ public class User {
 		return image;
 	}
 	
-	@Transient
 	public void setImage(String image) {
 		this.image = image;
 	}

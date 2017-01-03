@@ -15,7 +15,7 @@ import com.dao.UserDao;
 import com.security.UserSecurityService;
 
 @Configuration
-@ComponentScan( {"com.security","com.boot.spring", "com.boot", "com.example"})
+@ComponentScan( {"com.security","com.boot.spring", "com.boot", "com.example", "com.service.exceptions"})
 @Import({ SecurityConfig.class })
 public class AppConfig {
 

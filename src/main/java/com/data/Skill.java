@@ -20,7 +20,6 @@ public class Skill {
 	private String collectiveterm;
 	private String term;
 	private int priority;
-	private int ability;
 	private int id;
 	private String uuid;
 	private String parentId;
@@ -67,11 +66,4 @@ public class Skill {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-	public int getAbility() {
-		return ability;
-	}
-	public void setAbility(int ability) {
-		this.ability = ability;
-	}
-	
 }

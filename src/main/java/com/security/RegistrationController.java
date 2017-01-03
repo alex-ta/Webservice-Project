@@ -20,11 +20,6 @@ public class RegistrationController {
     
 	@Autowired
 	private UserDao dao;
-
-	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
-	public String welcomePage(Model model) {
-		return "welcome";
-	}
 	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model, HttpSession session) {
@@ -47,7 +42,7 @@ public class RegistrationController {
             return "registration";
         }
         dao.save(userForm.getUser());
-        return "redirect:/welcome";
+        return "redirect:/main";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

@@ -1,7 +1,7 @@
 package com.dao;
 import com.data.Hobby;
 
-public class HobbyDao extends Dao<Hobby>{
+public class HobbyDao extends DaoChild<Hobby,String>{
 
 	@Override
 	Class<Hobby> getDaoClass() {

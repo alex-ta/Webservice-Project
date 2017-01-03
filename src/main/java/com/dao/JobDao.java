@@ -1,8 +1,7 @@
 package com.dao;
-
 import com.data.Job;
 
-public class JobDao extends Dao<Job>{
+public class JobDao extends DaoChild<Job,String>{
 
 	@Override
 	Class<Job> getDaoClass() {

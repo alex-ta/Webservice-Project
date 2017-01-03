@@ -43,8 +43,8 @@ public class Hobby {
 	public String getParentId() {
 		return parentId;
 	}
-	public void setParentId(String parendId) {
-		this.parentId = parendId;
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getName() {

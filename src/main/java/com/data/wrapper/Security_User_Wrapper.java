@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.data.Roles;
 import com.data.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @XmlRootElement
 public class Security_User_Wrapper implements UserDetails{
@@ -21,18 +24,31 @@ public class Security_User_Wrapper implements UserDetails{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@JsonProperty(required = true)
+	@ApiModelProperty(notes = "The unique username", required = true)
 	private String name;
+	@JsonProperty(required = true)
+	@ApiModelProperty(notes = "The password of an user", required = true)
 	private String password;
-	private String passwordConfirm;
-	private String uuid;
-	private List<Roles> roles;
+	@JsonProperty(required = true)
+	@ApiModelProperty(notes = "The confirmation of that password", required = true)
+	private String passwordConfirm; // auslagern
+	@JsonProperty(required = true)
+	@ApiModelProperty(notes = "The uuid of an user", required = true)
+	private String uuid; // not required
+	@JsonProperty(required = true)
+	@ApiModelProperty(notes = "The roles belonging to an user", required = true)
+	private List<Roles> roles; // should not provide roles -> can not been changed
 
 
 	public Security_User_Wrapper(User user){
+		this();
+		if(user != null){
 		this.name = user.getId();
 		this.password = user.getPassword();
 		this.uuid = user.getUuid();
 		this.roles = user.getRoles();
+		}
 	}
 	
 	public Security_User_Wrapper() {
@@ -40,11 +56,14 @@ public class Security_User_Wrapper implements UserDetails{
 
 	public User getUser(){
 		User user = new User();
+		if(this.getName() != null)
 		user.setId(this.getName());
+		if(this.getPassword() != null)
 		user.setPassword(this.getPassword());
+		if(this.getUuid() != null)
 		user.setUuid(this.getUuid());
+		if(this.getRoles() != null)
 		user.setRoles(this.getRoles());
-		user.setId(this.getName());
 		return user;
 	}
 	

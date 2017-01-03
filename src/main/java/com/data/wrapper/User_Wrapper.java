@@ -3,6 +3,9 @@ package com.data.wrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.data.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @XmlRootElement
 public class User_Wrapper {
@@ -10,8 +13,11 @@ public class User_Wrapper {
 	public User_Wrapper(){}
 	
 	public User_Wrapper(User user){
+		this();
+		if(user != null){
 		this.uuid = user.getUuid();
-		this.name = user.getId();
+		this.username = user.getId();
+		this.name = user.getName();
 		this.surname = user.getSurname();
 		this.title = user.getTitle();
 		this.gender = user.getGender();
@@ -26,53 +32,112 @@ public class User_Wrapper {
 		this.birthdate = user.getBirthdate();
 		this.birthplace = user.getBirthplace();
 		this.image = user.getImage();
+		}
 	}
+
 	
-	public User getUser(){
-		User user = new User();
-		user.setUuid(this.getUuid());
-		user.setId(this.getName());
+	public User join(User user){
+		if(this.getUsername() != null)
+		user.setId(this.getUsername());
+		if(this.getName() != null)
+		user.setName(this.getName());
+		if(this.getSurname() != null)
 		user.setSurname(this.getSurname());
+		if(this.getTitle() != null)
 		user.setTitle(this.getTitle());
+		if(this.getGender() != null)
 		user.setGender(this.getGender());
+		if(this.getStreet() != null)
 		user.setStreet(this.getStreet());
+		if(this.getHousenumber() != null)
 		user.setHousenumber(this.getHousenumber());
+		if(this.getPlz() != null)
 		user.setPlz(this.getPlz());
+		if(this.getCity() != null)
 		user.setCity(this.getCity());
+		if(this.getCountry() != null)
 		user.setCountry(this.getCountry());
+		if(this.getNationality() != null)
 		user.setNationality(this.getNationality());
+		if(this.getPhone() != null)
 		user.setPhone(this.getPhone());
+		if(this.getMail() != null)
 		user.setMail(this.getMail());
+		if(this.getBirthdate() != null)
 		user.setBirthdate(this.getBirthdate());
+		if(this.getBirthplace() != null)
 		user.setBirthplace(this.getBirthplace());
+		if(this.getImage() != null)
 		user.setImage(this.getImage());
 		return user;
 	}
 	
+
 	
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The urlid which identifies an existing user object", required = true)
+	private String username;
+ 	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The urlid which identifies an existing user object", required = true)
 	private String uuid;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The name of an user", required = true)
 	private String name;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The surname of an user", required = true)
 	private String surname;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The title of an user", required = true)
 	private String title;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The gender of an user (male|female)", required = true)
 	private String gender;
 	
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The street of the users address", required = true)
 	private String street;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The housenumber of the users address", required = true)
 	private String housenumber;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The plz of the users address", required = true)
 	private String plz;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The city of the users address", required = true)
 	private String city;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The country of the users address", required = true)
 	private String country;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The nationality of the user", required = true)
 	private String nationality;
-	
+ 	
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The users phonenumber", required = true)
 	private String phone;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The users email address", required = true)
 	private String mail;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The users birthdate", required = true)
 	private String birthdate;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The users birthplace", required = true)
 	private String birthplace;
-	
+ 	
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The users image", required = true)
 	private String image;
-	private String jobsUrl;
-	private String skillUrl;
-	private String educationUrl;
-	private String hobbyUrl;	
 	
 	public String getUuid() {
 		return uuid;
@@ -170,29 +235,4 @@ public class User_Wrapper {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getJobsUrl() {
-		return jobsUrl;
-	}
-	public void setJobsUrl(String jobsUrl) {
-		this.jobsUrl = jobsUrl;
-	}
-	public String getSkillUrl() {
-		return skillUrl;
-	}
-	public void setSkillUrl(String skillUrl) {
-		this.skillUrl = skillUrl;
-	}
-	public String getEducationUrl() {
-		return educationUrl;
-	}
-	public void setEducationUrl(String educationUrl) {
-		this.educationUrl = educationUrl;
-	}
-	public String getHobbyUrl() {
-		return hobbyUrl;
-	}
-	public void setHobbyUrl(String hobbyUrl) {
-		this.hobbyUrl = hobbyUrl;
-	}
-	
 }

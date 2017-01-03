@@ -3,38 +3,64 @@ package com.data.wrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.data.Education;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 
 @XmlRootElement
 public class Education_Wrapper {
 	
+	@JsonProperty(required = true)
+	@ApiModelProperty(notes = "The start date of an education", required = true)
 	private String start;
+ 	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The end date of an education", required = true)
 	private String end;
+    @JsonProperty(required = true)
+    @ApiModelProperty(notes = "The institute that provided the education", required = true)
 	private String institute;
+    @JsonProperty(required = true)
+    @ApiModelProperty(notes = "The type of graduation gained", required = true)
 	private String graduation;
+    @JsonProperty(required = true)
+    @ApiModelProperty(notes = "The reached degree gained", required = true)
 	private String degree;
+    @JsonProperty(required = false)
+    @ApiModelProperty(notes = "The urlid which identifies an existing education object", required = true)
+	private String user;
+	@JsonProperty(required = true)
+    @ApiModelProperty(notes = "The urlid which identifies an existing user object", required = true)
 	private String uuid;
 	
 	public Education_Wrapper(){}
 	
 	public Education_Wrapper(Education e){
 		this();
+		if(e != null){
 		this.start = e.getStart();
 		this.end = e.getEnd();
 		this.institute = e.getInstitute();
 		this.graduation = e.getGraduation();
 		this.degree = e.getDegree();
+		this.user = e.getParentId();
 		this.uuid = e.getUuid();
+		}
 	}
-	
-	public Education getEducation(){
-		Education education = new Education();
+
+	public Education getEducation(Education education){
+		if(this.getStart() != null)
 		education.setStart(this.getStart());
+		if(this.getEnd() != null)
 		education.setEnd(this.getEnd());
+		if(this.getInstitute() != null)
 		education.setInstitute(this.getInstitute());
+		if(this.getGraduation() != null)
 		education.setGraduation(this.getGraduation());
+		if(this.getDegree() != null)
 		education.setDegree(this.getDegree());
-		education.setUuid(this.getUuid());
+		if(this.getUser() != null)
+		education.setParentId(this.getUser());
 		return education;
 	}
 	
@@ -74,6 +100,10 @@ public class Education_Wrapper {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-		
-	
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}	
 }

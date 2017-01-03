@@ -2,7 +2,7 @@ package com.dao;
 
 import com.data.Education;
 
-public class EducationDao extends Dao<Education>{
+public class EducationDao extends DaoChild<Education,String>{
 
 	@Override
 	Class<Education> getDaoClass() {

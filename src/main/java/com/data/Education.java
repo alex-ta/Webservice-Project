@@ -82,5 +82,12 @@ public class Education {
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}
+
+	@Override
+	public String toString() {
+		return this.start +" "+this.end+" "+this.id+" "+this.graduation+" "+this.parentId+" "+this.uuid+"";
+	}
+	
+	
 	
 }
